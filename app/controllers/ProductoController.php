@@ -10,10 +10,12 @@ class ProductoController extends Producto implements IApiUsable
 
     $nombre = $parametros['Nombre'];
     $precio = $parametros['Precio'];
+    $idRol = $parametros['IdRol'];
 
     $prod = new Producto();
     $prod->Nombre = $nombre;
     $prod->Precio = $precio;
+    $prod->IdRol = $idRol;
     $prod->crearProducto();
 
     $payload = json_encode(array("mensaje" => "Producto creado con exito"));
@@ -33,7 +35,7 @@ class ProductoController extends Producto implements IApiUsable
   }
 
   public function TraerTodos($request, $response, $args)
-  {
+  {    
     $lista = Producto::obtenerTodos();
     $payload = json_encode(array("listaProducto" => $lista));
 

@@ -5,13 +5,15 @@ class Producto
     public $Id;
     public $Nombre;
     public $Precio;
+    public $IdRol;
 
     public function crearProducto()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO Productos (Nombre, Precio) VALUES (:nombre, :precio)");        
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO Productos (Nombre, Precio, IdRol) VALUES (:nombre, :precio, :idRol)");
         $consulta->bindValue(':nombre', $this->Nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':precio', $this->Precio, PDO::PARAM_INT);
+        $consulta->bindValue(':precio', $this->Precio);
+        $consulta->bindValue(':idRol', $this->IdRol, PDO::PARAM_INT);
         $consulta->execute();
 
         return $objAccesoDatos->obtenerUltimoId();
@@ -40,7 +42,7 @@ class Producto
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDato->prepararConsulta("UPDATE Productos SET precio = :precio WHERE id = :id");
-        $consulta->bindValue(':precio', $precio);        
+        $consulta->bindValue(':precio', $precio);
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
     }
