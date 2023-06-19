@@ -16,6 +16,8 @@ require_once './db/AccesoDatos.php';
 // require_once './middlewares/Logger.php';
 
 require_once './controllers/EmpleadoController.php';
+require_once './controllers/MesaController.php';
+require_once './controllers/PedidoController.php';
 require_once './controllers/ProductoController.php';
 
 // Load ENV
@@ -44,11 +46,25 @@ $app->group('/productos', function (RouteCollectorProxy $group) {
   $group->post('[/]', \ProductoController::class . ':CargarUno');
 });
 
-$app->get('[/]', function (Request $request, Response $response) {    
-  $payload = json_encode(array("mensaje" => "Slim Framework 4 PHP"));
-  
-  $response->getBody()->write($payload);
-  return $response->withHeader('Content-Type', 'application/json');
+$app->group('/mesas', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \MesaController::class . ':TraerTodos');
+  $group->get('/{IdMesa}', \MesaController::class . ':TraerUno');  
+  $group->post('[/]', \MesaController::class . ':CargarUno');
 });
+
+$app->group('/pedidos', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \PedidoController::class . ':TraerTodos');
+  $group->get('/{IdPedido}', \PedidoController::class . ':TraerUno');  
+  $group->post('[/]', \PedidoController::class . ':CargarUno');//TODO: validar para que solo el mozo pueda hacerlo se puede llamar al traerUno del Empleado para saber el rol
+  $group->put('[/]', \PedidoController::class . ':ModificarUno');  
+  //BorrarUno
+});
+
+// $app->get('[/]', function (Request $request, Response $response) {    
+//   $payload = json_encode(array("mensaje" => "Slim Framework 4 PHP"));
+  
+//   $response->getBody()->write($payload);
+//   return $response->withHeader('Content-Type', 'application/json');
+// });
 
 $app->run();
