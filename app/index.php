@@ -60,28 +60,7 @@ $app->group('/pedidos', function (RouteCollectorProxy $group) {
   //BorrarUno
 });
 
-$app->get('[/]', function (Request $request, Response $response) {   
-  $ip = $_SERVER['REMOTE_ADDR'];
-  echo $ip;
-  $apiUrl = "http://ip-api.com/json/{$ip}";
-  
-  $resp = file_get_contents($apiUrl);
-  $data = json_decode($resp);
-  
-  if ($data->status == 'success') {
-      $country = $data->country;
-      $city = $data->city;
-      $latitude = $data->lat;
-      $longitude = $data->lon;
-  
-      echo "País: " . $country . "<br>";
-      echo "Ciudad: " . $city . "<br>";
-      echo "Latitud: " . $latitude . "<br>";
-      echo "Longitud: " . $longitude . "<br>";
-  } else {
-      echo "No se pudo obtener la ubicación.";
-  }
-  
+$app->get('[/]', function (Request $request, Response $response) {  
   $payload = json_encode(array("mensaje" => "Slim Framework 4 PHP"));
   
   $response->getBody()->write($payload);
