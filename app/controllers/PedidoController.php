@@ -45,12 +45,16 @@ class PedidoController extends Pedido implements IApiUsable
 
   public function ModificarUno($request, $response, $args)
   {
-    $parametros = $request->getParsedBody();
-    $guid = $parametros['Guid'];
+
+    $requestBody = file_get_contents("php://input");
+    $parametros = json_decode($requestBody, true);
+    
+    //$parametros = $request->getParsedBody();
+    $id = $parametros['Id'];
     $idEstado = $parametros['IdEstado'];
     $idEmpleado = $parametros['IdEmpleado'];
 
-    Pedido::modificarPedido($guid, $idEstado, $idEmpleado);
+    Pedido::modificarPedido($id, $idEstado, $idEmpleado);
 
     $payload = json_encode(array("mensaje" => "Pedido modificado con exito"));
 

@@ -84,14 +84,14 @@ class Pedido
         return $consulta->fetchObject('Pedido');
     }
 
-    public static function modificarPedido($guid, $idEstado, $idEmpleado)
+    public static function modificarPedido($id, $idEstado, $idEmpleado)
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
 
-        $consulta = $objAccesoDato->prepararConsulta("UPDATE Pedidos SET IdEstado = :idEstado , IdEmpleado = :idEmpleado WHERE guid = :guid");
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE Pedidos SET IdEstado = :idEstado , IdEmpleado = :idEmpleado WHERE Id = :id");
         $consulta->bindValue(':idEstado', $idEstado, PDO::PARAM_INT);
         $consulta->bindValue(':idEmpleado', $idEmpleado, PDO::PARAM_INT);
-        $consulta->bindValue(':guid', $guid, PDO::PARAM_STR);
+        $consulta->bindValue(':id', $id, PDO::PARAM_STR);
         $consulta->execute();
     }
 
