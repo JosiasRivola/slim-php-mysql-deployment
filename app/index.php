@@ -62,6 +62,7 @@ $app->group('/pedidos', function (RouteCollectorProxy $group) {
 
 $app->get('[/]', function (Request $request, Response $response) {   
   $ip = $_SERVER['REMOTE_ADDR'];
+  echo $ip;
   $apiUrl = "http://ip-api.com/json/{$ip}";
   
   $resp = file_get_contents($apiUrl);
