@@ -6,6 +6,7 @@ class Producto
     public $Nombre;
     public $Precio;
     public $IdRol;
+    public $FechaBaja;
 
     public function crearProducto()
     {
