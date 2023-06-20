@@ -16,7 +16,7 @@ class Pedido
     public function crearPedido()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO Pedidos (IdProducto, Fecha, IdEstado, Guid, IdMesa, IdEmpleado, NombreCliente, Foto) 
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO pedidos (IdProducto, Fecha, IdEstado, Guid, IdMesa, IdEmpleado, NombreCliente, Foto) 
                                                         VALUES (:idProducto, :fecha, :idEstado, :guid, :idMesa, :idEmpleado, :nombreCliente, :foto)");
         $fecha = new DateTime(date("d-m-Y"));
         $consulta->bindValue(':idProducto', $this->IdProducto, PDO::PARAM_INT);
@@ -35,7 +35,7 @@ class Pedido
     public static function obtenerTodos1()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM Pedidos");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM pedidos");
         $consulta->execute();
 
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Pedido');
@@ -67,7 +67,7 @@ class Pedido
     // {
     //     $objAccesoDatos = AccesoDatos::obtenerInstancia();
 
-    //     $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM Pedidos WHERE");
+    //     $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM pedidos WHERE");
     //     $consulta->execute();
 
     //     return $consulta->fetchAll(PDO::FETCH_CLASS, 'Pedido');
@@ -76,7 +76,7 @@ class Pedido
     public static function obtenerPedido($id)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM Pedidos WHERE id = :id");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM pedidos WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
 
@@ -87,7 +87,7 @@ class Pedido
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
 
-        $consulta = $objAccesoDato->prepararConsulta("UPDATE Pedidos SET IdEstado = :idEstado , IdEmpleado = :idEmpleado WHERE Id = :id");
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE pedidos SET IdEstado = :idEstado , IdEmpleado = :idEmpleado WHERE Id = :id");
         $consulta->bindValue(':idEstado', $idEstado, PDO::PARAM_INT);
         $consulta->bindValue(':idEmpleado', $idEmpleado, PDO::PARAM_INT);
         $consulta->bindValue(':id', $id, PDO::PARAM_STR);
@@ -97,7 +97,7 @@ class Pedido
     public static function borrarPedido($idGuid)
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDato->prepararConsulta("UPDATE Pedidos SET FechaBaja = :fechaBaja WHERE guid = :idGuid");
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE pedidos SET FechaBaja = :fechaBaja WHERE guid = :idGuid");
         $fecha = new DateTime(date("d-m-Y"));
         $consulta->bindValue(':idGuid', $idGuid, PDO::PARAM_STR);
         $consulta->bindValue(':fechaBaja', date_format($fecha, 'Y-m-d H:i:s'));
