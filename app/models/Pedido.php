@@ -21,7 +21,7 @@ class Pedido
         $fecha = new DateTime(date("d-m-Y"));
         $consulta->bindValue(':idProducto', $this->IdProducto, PDO::PARAM_INT);
         $consulta->bindValue(':fecha', date_format($fecha, 'Y-m-d H:i:s'));
-        $consulta->bindValue(':idEstado', 1, PDO::PARAM_INT);
+        $consulta->bindValue(':idEstado', $this->IdEstado, PDO::PARAM_INT);
         $consulta->bindValue(':guid', $this->Guid, PDO::PARAM_STR);        
         $consulta->bindValue(':idMesa', $this->IdMesa, PDO::PARAM_INT);
         $consulta->bindValue(':idEmpleado', $this->IdEmpleado, PDO::PARAM_INT);

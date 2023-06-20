@@ -10,8 +10,9 @@ class PedidoController extends Pedido implements IApiUsable
 
     $pedido = new Pedido();
     $pedido->IdProducto = $parametros['IdProducto'];
-    $pedido->Guid = substr(uniqid(), 0, 5);
-    $pedido->IdMesa = $parametros['IdMesa'];    
+    $pedido->Guid = isset($parametros['Guid']) ? $parametros['Guid'] : substr(uniqid(), 0, 5);
+    $pedido->IdMesa = $parametros['IdMesa'];
+    $pedido->IdEstado = $parametros['IdEstado'];
     $pedido->IdEmpleado = $parametros['IdEmpleado'];
     $pedido->NombreCliente = $parametros['NombreCliente'];
     $pedido->Foto = $parametros['Foto'];
@@ -48,8 +49,7 @@ class PedidoController extends Pedido implements IApiUsable
 
     $requestBody = file_get_contents("php://input");
     $parametros = json_decode($requestBody, true);
-    
-    //$parametros = $request->getParsedBody();
+
     $id = $parametros['Id'];
     $idEstado = $parametros['IdEstado'];
     $idEmpleado = $parametros['IdEmpleado'];
