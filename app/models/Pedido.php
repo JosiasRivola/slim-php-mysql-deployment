@@ -52,8 +52,7 @@ class Pedido
         EMP.Nombre \"Empleado\", 
         R.Descripcion \"Rol\", 
         P.NombreCliente, 
-        P.Foto, 
-        P.FechaBaja 
+        P.Foto
         FROM pedidos P 
         INNER JOIN productos PR ON P.IdProducto = PR.Id
         INNER JOIN estados E ON P.IdEstado = E.Id
