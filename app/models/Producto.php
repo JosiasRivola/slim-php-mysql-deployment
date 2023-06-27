@@ -23,10 +23,17 @@ class Producto
     public static function obtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM productos");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT P.Id,
+                                                        P.Nombre,
+                                                        P.Precio, 
+                                                        R.Descripcion 'Rol' 
+                                                        FROM productos P 
+                                                        INNER JOIN roles R 
+                                                        on P.IdRol = R.Id 
+                                                        Order by P.Id;");
         $consulta->execute();
 
-        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Producto');
+        return $consulta->fetchAll(PDO::FETCH_OBJ);
     }
 
     public static function obtenerProducto($id)

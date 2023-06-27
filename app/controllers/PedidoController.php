@@ -7,10 +7,10 @@ class PedidoController extends Pedido implements IApiUsable
   public function CargarUno($request, $response, $args)
   {
     $parametros = $request->getParsedBody();
-
+    $newGuid = uniqid();  
     $pedido = new Pedido();
     $pedido->IdProducto = $parametros['IdProducto'];
-    $pedido->Guid = isset($parametros['Guid']) ? $parametros['Guid'] : substr(uniqid(), 0, 5);
+    $pedido->Guid = isset($parametros['Guid']) ? $parametros['Guid'] : substr($newGuid, 8, 5);
     $pedido->IdMesa = $parametros['IdMesa'];
     $pedido->IdEstado = $parametros['IdEstado'];
     $pedido->IdEmpleado = $parametros['IdEmpleado'];
@@ -19,7 +19,19 @@ class PedidoController extends Pedido implements IApiUsable
 
     $pedido->crearPedido();
 
-    $payload = json_encode(array("mensaje" => "Pedido creado con exito"));
+    $payload = json_encode(array("mensaje" => "Pedido creado con exito con codigo: {$pedido->Guid}"));
+
+    $response->getBody()->write($payload);
+    return $response->withHeader('Content-Type', 'application/json');
+  }
+
+  public function ActualizarUno($request, $response, $args)
+  {
+    $parametros = $request->getParsedBody();
+  
+    Pedido::ActualizarPedido($parametros['Guid'], $parametros['IdEstado'], $parametros['IdEmpleado'], $parametros['TiempoEstimado']);
+
+    $payload = json_encode(array("mensaje" => "Pedido actualizado con exito"));
 
     $response->getBody()->write($payload);
     return $response->withHeader('Content-Type', 'application/json');
@@ -44,21 +56,29 @@ class PedidoController extends Pedido implements IApiUsable
     return $response->withHeader('Content-Type', 'application/json');
   }
 
-  public function ModificarUno($request, $response, $args)
-  {
+  public function ObtenerTodosPendientes($request, $response, $args)
+  {        
+    $lista = Pedido::obtenerTodosPendientesRol(1, $args['IdRol']);
+    $payload = json_encode(array("listaPedido" => $lista));
 
-    $requestBody = file_get_contents("php://input");
-    $parametros = json_decode($requestBody, true);
+    $response->getBody()->write($payload);
+    return $response->withHeader('Content-Type', 'application/json');
+  }
+
+  public function ModificarUno($request, $response, $args)
+  {    
+    $parametros = $request->getParsedBody();
 
     $id = $parametros['Id'];
     $idEstado = $parametros['IdEstado'];
     $idEmpleado = $parametros['IdEmpleado'];
+    $TiempoEstimado = $parametros['TiempoEstimado'];
 
-    Pedido::modificarPedido($id, $idEstado, $idEmpleado);
+    //Pedido::modificarPedido($id, $idEstado, $idEmpleado, $TiempoEstimado);
 
     $payload = json_encode(array("mensaje" => "Pedido modificado con exito"));
-
-    $response->getBody()->write($payload);
+    
+    $response->getBody()->write($payload);    
     return $response->withHeader('Content-Type', 'application/json');
   }
 

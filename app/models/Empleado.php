@@ -7,12 +7,12 @@ class Empleado
     public $IdRol;
     public $FechaBaja;
 
-    public function crearEmpleado()
+    public static function CrearEmpleado($Nombre, $IdRol)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO empleados (Nombre, IdRol) VALUES (:nombre, :idRol)");
-        $consulta->bindValue(':nombre', $this->Nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':idRol', $this->IdRol, PDO::PARAM_INT);
+        $consulta->bindValue(':nombre', $Nombre, PDO::PARAM_STR);
+        $consulta->bindValue(':idRol', $IdRol, PDO::PARAM_INT);
         $consulta->execute();
 
         return $objAccesoDatos->obtenerUltimoId();
@@ -21,10 +21,12 @@ class Empleado
     public static function obtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM empleados");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT E.Id, E.Nombre, R.Descripcion \"Rol\"
+                                                         FROM empleados E 
+                                                         INNER JOIN roles R ON E.IdRol = R.Id;");
         $consulta->execute();
 
-        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Empleado');
+        return $consulta->fetchAll(PDO::FETCH_OBJ);
     }
 
     public static function obtenerEmpleado($id)
@@ -33,7 +35,6 @@ class Empleado
         $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM empleados WHERE Id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_STR);
         $consulta->execute();
-
         return $consulta->fetchObject('Empleado');
     }
 

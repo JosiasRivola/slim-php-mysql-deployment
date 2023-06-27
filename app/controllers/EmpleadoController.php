@@ -6,11 +6,8 @@ class EmpleadoController extends Empleado implements IApiUsable
 {
   public function CargarUno($request, $response, $args)
   {
-    $parametros = $request->getParsedBody();
-    $emp = new Empleado();
-    $emp->Nombre = $parametros['Nombre'];
-    $emp->IdRol = $parametros['IdRol'];
-    $emp->crearEmpleado();
+    $parametros = $request->getParsedBody();    
+    Empleado::CrearEmpleado($parametros['Nombre'], $parametros['IdRol']);
 
     $payload = json_encode(array("mensaje" => "Empleado creado con exito"));
     $response->getBody()->write($payload);

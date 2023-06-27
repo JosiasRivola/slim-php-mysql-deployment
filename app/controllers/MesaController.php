@@ -6,14 +6,10 @@ class MesaController extends Mesa implements IApiUsable
 {
   public function CargarUno($request, $response, $args)
   {
-    $parametros = $request->getParsedBody();
-
-    $CantidadSillas = $parametros['CantidadSillas'];
-    $IdEstado = $parametros['IdEstado'];
-
+    $newGuid = uniqid();      
+    $parametros = $request->getParsedBody();        
     $mesa = new Mesa();
-    $mesa->CantidadSillas = $CantidadSillas;
-    $mesa->IdEstado = $IdEstado;
+    $mesa->CodigoMesa = isset($parametros['CodigoMesa']) ? $parametros['CodigoMesa'] : substr($newGuid, 8, 5);
     $mesa->crearMesa();
 
     $payload = json_encode(array("mensaje" => "Mesa creado con exito"));
@@ -44,10 +40,10 @@ class MesaController extends Mesa implements IApiUsable
   public function ModificarUno($request, $response, $args)
   {
     $parametros = $request->getParsedBody();
-    $id = $parametros['IdMesa'];
-    $cantidadSillas = $parametros['CantidadSillas'];
+    $codigoMesa = $parametros['CodigoMesa'];
+    $idEstado = $parametros['IdEstado'];
 
-    Mesa::modificarMesa($id, $cantidadSillas);
+    Mesa::modificarMesa($codigoMesa, $idEstado);
 
     $payload = json_encode(array("mensaje" => "Mesa modificado con exito"));
 

@@ -3,16 +3,15 @@
 class Mesa
 {
     public $Id;
-    public $CantidadSillas;
+    public $CodigoMesa;
     public $IdEstado;
     public $FechaBaja;
 
     public function crearMesa()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO mesas (CantidadSillas, IdEstado) VALUES (:cantidadSillas, :idEstado)");
-        $consulta->bindValue(':cantidadSillas', $this->CantidadSillas, PDO::PARAM_INT);
-        $consulta->bindValue(':idEstado', $this->IdEstado, PDO::PARAM_INT);        
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO mesas (CodigoMesa, IdEstado) VALUES (:codigoMesa, 1)");
+        $consulta->bindValue(':codigoMesa', $this->CodigoMesa, PDO::PARAM_STR);               
         $consulta->execute();
 
         return $objAccesoDatos->obtenerUltimoId();
@@ -37,12 +36,12 @@ class Mesa
         return $consulta->fetchObject('Mesa');
     }
 
-    public static function modificarMesa($id, $idEstado)
+    public static function modificarMesa($codigoMesa, $idEstado)
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDato->prepararConsulta("UPDATE mesas SET IdEstado = :idEstado WHERE id = :id");
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE mesas SET IdEstado = :idEstado WHERE codigoMesa = :codigoMesa");
         $consulta->bindValue(':idEstado', $idEstado, PDO::PARAM_INT);
-        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+        $consulta->bindValue(':codigoMesa', $codigoMesa, PDO::PARAM_STR);
         $consulta->execute();
     }
 

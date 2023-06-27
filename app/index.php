@@ -13,10 +13,12 @@ use Slim\Routing\RouteContext;
 require __DIR__ . '/../vendor/autoload.php';
 
 require_once './db/AccesoDatos.php';
-// require_once './middlewares/Logger.php';
+require_once './middlewares/AutentificadorJWT.php';
+require_once './middlewares/ValidarEstadoRol.php';
 
 require_once './controllers/EmpleadoController.php';
 require_once './controllers/MesaController.php';
+require_once './controllers/DumpController.php';
 require_once './controllers/PedidoController.php';
 require_once './controllers/ProductoController.php';
 
@@ -50,14 +52,90 @@ $app->group('/mesas', function (RouteCollectorProxy $group) {
   $group->get('[/]', \MesaController::class . ':TraerTodos');
   $group->get('/{IdMesa}', \MesaController::class . ':TraerUno');  
   $group->post('[/]', \MesaController::class . ':CargarUno');
+  $group->post('/actualizarmesa[/]', \MesaController::class . ':ModificarUno')->add(new ValidarEstadoRol());
+  
 });
 
 $app->group('/pedidos', function (RouteCollectorProxy $group) {
   $group->get('[/]', \PedidoController::class . ':TraerTodos');
-  $group->get('/{IdPedido}', \PedidoController::class . ':TraerUno');  
-  $group->post('[/]', \PedidoController::class . ':CargarUno');//TODO: validar para que solo el mozo pueda hacerlo se puede llamar al traerUno del Empleado para saber el rol
-  $group->put('[/]', \PedidoController::class . ':ModificarUno');  
-  //BorrarUno
+  $group->post('[/]', \PedidoController::class . ':CargarUno')->add(new ValidarEstadoRol());
+  $group->get('/pendientes/{IdRol}', \PedidoController::class . ':ObtenerTodosPendientes');  
+  $group->post('/ActualizarPedido[/]', \PedidoController::class . ':ActualizarUno')->add(new ValidarEstadoRol());
+});
+
+$app->group('/dump', function (RouteCollectorProxy $group) {
+  $group->get('/exportar[/]', \DumpController::class . ':ExportarDump');
+  $group->get('/importar[/]', \DumpController::class . ':ImportarDump');
+});
+
+$app->group('/jwt', function (RouteCollectorProxy $group) {
+
+  $group->post('/crearToken', function (Request $request, Response $response) {    
+    $parametros = $request->getParsedBody();
+
+    $IdEmpleado = $parametros['IdEmpleado'];
+    $rol = $parametros['Rol'];
+
+    $datos = array('IdEmpleado' => $IdEmpleado, 'Rol' => $rol);
+
+    $token = AutentificadorJWT::CrearToken($datos);
+    $payload = json_encode(array('jwt' => $token));
+
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  });
+
+  $group->get('/devolverPayLoad', function (Request $request, Response $response) {
+    $header = $request->getHeaderLine('Authorization');
+    $token = trim(explode("Bearer", $header)[1]);
+
+    try {
+      $payload = json_encode(array('payload' => AutentificadorJWT::ObtenerPayLoad($token)));
+    } catch (Exception $e) {
+      $payload = json_encode(array('error' => $e->getMessage()));
+    }
+
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  });
+
+  $group->get('/devolverDatos', function (Request $request, Response $response) {
+    $header = $request->getHeaderLine('Authorization');
+    $token = trim(explode("Bearer", $header)[1]);
+
+    try {
+      $payload = json_encode(array('datos' => AutentificadorJWT::ObtenerData($token)));
+    } catch (Exception $e) {
+      $payload = json_encode(array('error' => $e->getMessage()));
+    }
+
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  });
+
+  $group->get('/verificarToken', function (Request $request, Response $response) {
+    $header = $request->getHeaderLine('Authorization');
+    $token = trim(explode("Bearer", $header)[1]);
+    $esValido = false;
+
+    try {
+      AutentificadorJWT::verificarToken($token);
+      $esValido = true;
+    } catch (Exception $e) {
+      $payload = json_encode(array('error' => $e->getMessage()));
+    }
+
+    if ($esValido) {
+      $payload = json_encode(array('valid' => $esValido));
+    }
+
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  });
 });
 
 $app->get('[/]', function (Request $request, Response $response) {  
