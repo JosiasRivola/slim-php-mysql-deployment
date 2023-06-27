@@ -1,0 +1,850 @@
+{
+	"info": {
+		"_postman_id": "636c26b2-d979-4d08-8e4d-d34243dfca09",
+		"name": "Comanda Local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5311113"
+	},
+	"item": [
+		{
+			"name": "Empleados",
+			"item": [
+				{
+					"name": "ListadoEmpleados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:777/empleados/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"empleados",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListadoEmpleadoUnico",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:777/empleados/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"empleados",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AltaEmpleado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Nombre",
+									"value": "Sofía",
+									"type": "text"
+								},
+								{
+									"key": "IdRol",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:777/empleados/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"empleados",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "ListadoProductos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:777/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListadoProductoUnico",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:777/productos/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"productos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AltaProducto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Nombre",
+									"value": "Cosmepolitan",
+									"type": "text"
+								},
+								{
+									"key": "Precio",
+									"value": "1900",
+									"type": "text"
+								},
+								{
+									"key": "IdRol",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:777/productos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"productos",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mesas",
+			"item": [
+				{
+					"name": "ListadoMesas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:777/mesas/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"mesas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListadoMesaUnica",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:777/mesas/id=123as",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"mesas",
+								"id=123as"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CrearMesa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "CodigoMesa",
+									"value": "22221",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:777/mesas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"mesas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar-ClienteEsperandoPedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "CodigoMesa",
+									"value": "AB3C8",
+									"type": "text"
+								},
+								{
+									"key": "IdEstado",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "IdEmpleado",
+									"value": "11",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:777/mesas/actualizarmesa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"mesas",
+								"actualizarmesa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar-ClienteComiendo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "CodigoMesa",
+									"value": "AB3C8",
+									"type": "text"
+								},
+								{
+									"key": "IdEstado",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "IdEmpleado",
+									"value": "11",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:777/mesas/actualizarmesa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"mesas",
+								"actualizarmesa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar-ClientePagando",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "CodigoMesa",
+									"value": "AB3C8",
+									"type": "text"
+								},
+								{
+									"key": "IdEstado",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "IdEmpleado",
+									"value": "11",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:777/mesas/actualizarmesa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"mesas",
+								"actualizarmesa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar-MesaCerrada",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:777/mesas/actualizarmesa?CodigoMesa=AB3C8&IdEstado=7&IdEmpleado=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"mesas",
+								"actualizarmesa"
+							],
+							"query": [
+								{
+									"key": "CodigoMesa",
+									"value": "AB3C8"
+								},
+								{
+									"key": "IdEstado",
+									"value": "7"
+								},
+								{
+									"key": "IdEmpleado",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "ListadoDeTodosPedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:777/pedidos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"pedidos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListadoPedidosPorRol",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:777/pedidos/pendientes/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"pedidos",
+								"pendientes",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListadoPedidoUnico",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:777/pedidos/ac76c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"pedidos",
+								"ac76c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AltaPedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "IdProducto",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "IdMesa",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "IdEmpleado",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "IdEstado",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "NombreCliente",
+									"value": "Lucas Giosso",
+									"type": "text"
+								},
+								{
+									"key": "Foto",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:777/pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarPedidoProgreso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Guid\":\"aa96d\",\r\n    \"IdEstado\" : 2,\r\n    \"IdEmpleado\": 7,\r\n    \"TiempoEstimado\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:777/pedidos/ActualizarPedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"pedidos",
+								"ActualizarPedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarPedidoListoParaServir",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Guid\":\"aa96d\",\r\n    \"IdEstado\" : 3,\r\n    \"IdEmpleado\": 7,\r\n    \"TiempoEstimado\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:777/pedidos/ActualizarPedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"pedidos",
+								"ActualizarPedido"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "JWT",
+			"item": [
+				{
+					"name": "DevolverPayLoad",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODc3OTU1MTUsImV4cCI6MTY4Nzg1NTUxNSwiZGF0YSI6eyJJZEVtcGxlYWRvIjoiNSIsIlJvbCI6IjEifSwiYXBwIjoiQ29tYW5kYSJ9.U_0k-mqmEuZps_wsvF2CBJ_QKaDsjFvUiLwgF-9yP9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:777/jwt/verificarToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"jwt",
+								"verificarToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CrearToken",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "IdEmpleado",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "Rol",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:777/jwt/crearToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"jwt",
+								"crearToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dumps",
+			"item": [
+				{
+					"name": "Importar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:777/dump/importar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"dump",
+								"importar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exportar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:777/dump/exportar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "777",
+							"path": [
+								"dump",
+								"exportar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.collectionVariables.set(\"CodBarra\", _.random(100000, 999999));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Nombre",
+			"value": "Amarillo"
+		},
+		{
+			"key": "Pass",
+			"value": "{{$randomInt}}"
+		},
+		{
+			"key": "CodBarra",
+			"value": "CodBarra"
+		}
+	]
+}
