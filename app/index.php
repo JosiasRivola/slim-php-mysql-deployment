@@ -58,8 +58,9 @@ $app->group('/mesas', function (RouteCollectorProxy $group) {
 
 $app->group('/pedidos', function (RouteCollectorProxy $group) {
   $group->get('[/]', \PedidoController::class . ':TraerTodos');
-  $group->post('[/]', \PedidoController::class . ':CargarUno')->add(new ValidarEstadoRol());
+  $group->get('/{IdPedido}', \PedidoController::class . ':TraerUno'); 
   $group->get('/pendientes/{IdRol}', \PedidoController::class . ':ObtenerTodosPendientes');  
+  $group->post('[/]', \PedidoController::class . ':CargarUno')->add(new ValidarEstadoRol());
   $group->post('/ActualizarPedido[/]', \PedidoController::class . ':ActualizarUno')->add(new ValidarEstadoRol());
 });
 
